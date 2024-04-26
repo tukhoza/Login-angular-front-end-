@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup, FormControl, FormBuilder} from '@angular/forms';
 import {NgIf} from '@angular/common';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-authentication-page',
   standalone: true,
-  imports: [NgIf],
+  imports: [NgIf, ReactiveFormsModule],
   templateUrl: './authentication-page.component.html',
   styleUrl: './authentication-page.component.scss'
 })
@@ -13,12 +14,12 @@ export class AuthenticationPageComponent implements OnInit {
 
   pageNum:number = 1;
   
-  singinForm = this.formBuilder.group({
+  singinForm: FormGroup = this.formBuilder.group({
     username: '',
     password: ''
   })
 
-  signupForm = this.formBuilder.group({
+  signupForm: FormGroup = this.formBuilder.group({
     email: '',
     username: '',
     password: ''
@@ -33,6 +34,14 @@ export class AuthenticationPageComponent implements OnInit {
 
   onPageNum(pageNum:number){
     this.pageNum = pageNum;
+  }
+
+  onSignin(){
+    console.log("Signin >", this.singinForm.value)
+  }
+
+  onSignup(){
+    console.log("Signup >", this.signupForm.value)
   }
 
 }
